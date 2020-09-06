@@ -20,7 +20,7 @@ try {
     const serverPath = `${ftpHostname}/${dest}/${remoteDirPath}`.replace(/\/\//g, '/');
     const fullFtpPath = `ftp://${serverPath}`;
     console.log(`${file.filename} -> ${fullFtpPath}`);
-    await exec.exec('curl', ['-T', file.filename, '--user', `${ftpUsername}:${ftpPassword}`,fullFtpPath])
+    await exec.exec('curl', ['-s', '-T', file.filename, '--user', `${ftpUsername}:${ftpPassword}`,fullFtpPath])
   });
 } catch (error) {
   core.setFailed(error.message);
