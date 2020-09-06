@@ -12,7 +12,7 @@ try {
   const ftpPassword = core.getInput('ftpPassword');
   const ftpHostname = core.getInput('ftpHostname');
 
-  files.forEach(file => {
+  files.forEach(async (file) => {
     if (!file.filename.startsWith(src))
       return;
     const remoteFilePath = file.filename.substr(src.length);
