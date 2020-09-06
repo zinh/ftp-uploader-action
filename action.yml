@@ -1,4 +1,4 @@
-name: 'Hello world'
+name: 'FTP Uploader'
 description: 'A hello world action'
 inputs:
   ftpHostname:
