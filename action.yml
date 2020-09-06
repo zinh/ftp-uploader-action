@@ -1,0 +1,31 @@
+name: 'Hello world'
+description: 'A hello world action'
+inputs:
+  ftpHostname:
+    description: 'Hostname of ftp server, eg: ftpHostname: ftp.test'
+    required: true
+  ftpUsername: 
+    description: 'User of ftp account'
+    required: false
+    default: anonymous
+  ftpPassword:
+    description: 'Password of ftp account'
+    required: false
+    default: ''
+  files:
+    description: 'List files to upload to ftp server'
+    required: true
+  src:
+    description: 'Source folder'
+    required: false
+    default: ''
+  dest:
+    description: 'Destination folder'
+    require: false
+    default: '/'
+outputs:
+  time:
+    description: 'The time we greeted you'
+runs:
+  using: 'node12'
+  main: 'index.js'
