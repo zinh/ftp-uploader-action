@@ -1,5 +1,5 @@
 name: 'FTP Uploader'
-description: 'A hello world action'
+description: 'Simple ftp uploader action'
 inputs:
   ftpHostname:
     description: 'Hostname of ftp server, eg: ftpHostname: ftp.test'
