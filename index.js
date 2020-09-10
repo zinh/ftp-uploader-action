@@ -17,7 +17,7 @@ try {
       return;
     const remoteFilePath = file.filename.substr(src.length);
     const remoteDirPath = path.dirname(remoteFilePath);
-    const serverPath = `${ftpHostname}/${dest}/${remoteDirPath}`.replace(/\/\//g, '/');
+    const serverPath = `${ftpHostname}/${dest}/${remoteDirPath}/`.replace(/\/\//g, '/');
     const fullFtpPath = `ftp://${serverPath}`;
     console.log(`${file.filename} -> ${fullFtpPath}`);
     await exec.exec('curl', ['-s', '-T', file.filename, '--user', `${ftpUsername}:${ftpPassword}`,fullFtpPath])
