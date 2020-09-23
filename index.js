@@ -13,8 +13,8 @@ async function main(){
     const ftpPassword = core.getInput('ftpPassword');
     const ftpHostname = core.getInput('ftpHostname');
 
-    console.log('new version 1');
-    await Promise.all(files.map((file) => {
+    console.log('new version 2');
+    for (let file of files) {
       if (!file.filename.startsWith(src))
         return;
       const remoteFilePath = file.filename.substr(src.length);
@@ -22,8 +22,8 @@ async function main(){
       const serverPath = `${ftpHostname}/${dest}/${remoteDirPath}/`.replace(/\/\//g, '/');
       const fullFtpPath = `ftp://${serverPath}`;
       console.log(`${file.filename} -> ${fullFtpPath}`);
-      return exec.exec('curl', ['-vvv', '-T', file.filename, '--user', `${ftpUsername}:${ftpPassword}`,fullFtpPath])
-    }));
+      await exec.exec('curl', ['-v', '-T', file.filename, '--user', `${ftpUsername}:${ftpPassword}`,fullFtpPath])
+    }
   } catch (error) {
     core.setFailed(error.message);
   }
