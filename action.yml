@@ -25,7 +25,7 @@ inputs:
     default: '/'
   dryRun:
     description: 'For debug'
-    require: false
+    required: false
     default: false
 outputs:
   time:
