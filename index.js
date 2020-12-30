@@ -4,6 +4,7 @@ const path = require('path');
 
 async function main(){
   try {
+    const dryRun = core.getInput('dryRun');
     if (dryRun)
       console.log('Running in dryRun mode');
     const time = (new Date()).toTimeString();
