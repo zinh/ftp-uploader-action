@@ -18,7 +18,7 @@ async function main(){
 
     for (let file of files) {
       if (!file.filename.startsWith(src))
-        return;
+        continue;
       const remoteFilePath = file.filename.substr(src.length);
       const remoteDirPath = path.dirname(remoteFilePath);
       const serverPath = `${ftpHostname}/${dest}/${remoteDirPath}/`.replace(/\/\//g, '/');
