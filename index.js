@@ -21,7 +21,7 @@ async function main(){
         continue;
       const remoteFilePath = file.filename.substr(src.length);
       const remoteDirPath = path.dirname(remoteFilePath);
-      const serverPath = `${ftpHostname}/${dest}/${remoteDirPath}/`.replace(/\/\//g, '/');
+      const serverPath = `${ftpHostname}/${dest}/${remoteDirPath}/`.replace(/\/{2,}/g, '/');
       const fullFtpPath = `ftp://${serverPath}`;
       console.log(`${file.filename} -> ${fullFtpPath}`);
       if (!dryRun)
