@@ -4,6 +4,8 @@ const path = require('path');
 
 async function main(){
   try {
+    if (dryRun)
+      console.log('Running in dryRun mode');
     const time = (new Date()).toTimeString();
     const files = JSON.parse(core.getInput('files'));
 
@@ -21,7 +23,8 @@ async function main(){
       const serverPath = `${ftpHostname}/${dest}/${remoteDirPath}/`.replace(/\/\//g, '/');
       const fullFtpPath = `ftp://${serverPath}`;
       console.log(`${file.filename} -> ${fullFtpPath}`);
-      await exec.exec('curl', ['-s', '-T', file.filename, '--user', `${ftpUsername}:${ftpPassword}`,fullFtpPath])
+      if (!dryRun)
+        await exec.exec('curl', ['-s', '-T', file.filename, '--user', `${ftpUsername}:${ftpPassword}`,fullFtpPath])
     }
   } catch (error) {
     core.setFailed(error.message);

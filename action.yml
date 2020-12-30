@@ -23,6 +23,10 @@ inputs:
     description: 'Destination folder'
     require: false
     default: '/'
+  dryRun:
+    description: 'For debug'
+    require: false
+    default: false
 outputs:
   time:
     description: 'The time we greeted you'
