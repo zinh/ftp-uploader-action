@@ -28,7 +28,7 @@ async function main(){
       switch(file.status) {
         case 'removed':
           const fileToRemove = path.basename(filename);
-          curlFlags = ['--quote', `'-DELE ${fileToRemove}'`, '--user', `${ftpUsername}:${ftpPassword}`, fullFtpPath]
+          curlFlags = ['-v', '--quote', `'-DELE ${fileToRemove}'`, '--user', `${ftpUsername}:${ftpPassword}`, fullFtpPath]
           break;
         default:
           curlFlags = ['--silent', '--upload-file', filename, '--user', `${ftpUsername}:${ftpPassword}`, fullFtpPath]
