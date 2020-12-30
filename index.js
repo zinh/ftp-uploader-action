@@ -17,15 +17,26 @@ async function main(){
     const ftpHostname = core.getInput('ftpHostname');
 
     for (let file of files) {
-      if (!file.filename.startsWith(src))
+      const filename = file.filename;
+      if (!filename.startsWith(src))
         continue;
-      const remoteFilePath = file.filename.substr(src.length);
+      const remoteFilePath = filename.substr(src.length);
       const remoteDirPath = path.dirname(remoteFilePath);
       const serverPath = `${ftpHostname}/${dest}/${remoteDirPath}/`.replace(/\/{2,}/g, '/');
       const fullFtpPath = `ftp://${serverPath}`;
-      console.log(`${file.filename} -> ${fullFtpPath}`);
+      let curlFlags;
+      switch(file.status) {
+        case 'removed':
+          const fileToRemove = path.basename(filename);
+          curlFlags = ['--silent', '--quote', `-DELE ${fileToRemove}`, '--user', `${ftpUsername}:${ftpPassword}`, fullFtpPath]
+          break;
+        default:
+          curlFlags = ['--silent', '--upload-file', filename, '--user', `${ftpUsername}:${ftpPassword}`, fullFtpPath]
+          break;
+      }
+      console.log(curlFlags.join(' '));
       if (dryRun !== 'true')
-        await exec.exec('curl', ['-s', '-T', file.filename, '--user', `${ftpUsername}:${ftpPassword}`,fullFtpPath])
+        await exec.exec('curl', curlFlags)
     }
   } catch (error) {
     core.setFailed(error.message);
