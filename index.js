@@ -31,7 +31,7 @@ async function main(){
           curlFlags = ['--silent', '--quote', `-DELE ${fileToRemove}`, '--user', `${ftpUsername}:${ftpPassword}`, fullFtpPath]
           break;
         default:
-          curlFlags = ['--silent', '--upload-file', filename, '--user', `${ftpUsername}:${ftpPassword}`, fullFtpPath]
+          curlFlags = ['--ftp-create-dirs', '--silent', '--upload-file', filename, '--user', `${ftpUsername}:${ftpPassword}`, fullFtpPath]
           break;
       }
       console.log(curlFlags.join(' '));
