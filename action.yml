@@ -27,6 +27,10 @@ inputs:
     description: 'For debug'
     required: false
     default: false
+  ignore:
+    description: 'Files to ignore'
+    required: false
+    default: []
 outputs:
   time:
     description: 'The time we greeted you'

@@ -15,11 +15,15 @@ async function main(){
     const ftpUsername = core.getInput('ftpUsername');
     const ftpPassword = core.getInput('ftpPassword');
     const ftpHostname = core.getInput('ftpHostname');
+    const ignoreFiles = core.getInput('ignore');
 
     for (let file of files) {
       const filename = file.filename;
       if (!filename.startsWith(src))
         continue;
+      for (let ignoreFile of ignoreFiles)
+        if (filename.endsWith(ignoreFile))
+          continue
       const remoteFilePath = filename.substr(src.length);
       const remoteDirPath = path.dirname(remoteFilePath);
       const serverPath = `${ftpHostname}/${dest}/${remoteDirPath}/`.replace(/\/{2,}/g, '/');
