@@ -30,7 +30,7 @@ inputs:
   ignore:
     description: 'Files to ignore'
     required: false
-    default: []
+    default: '[]'
 outputs:
   time:
     description: 'The time we greeted you'

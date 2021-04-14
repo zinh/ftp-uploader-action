@@ -15,7 +15,7 @@ async function main(){
     const ftpUsername = core.getInput('ftpUsername');
     const ftpPassword = core.getInput('ftpPassword');
     const ftpHostname = core.getInput('ftpHostname');
-    const ignoreFiles = core.getInput('ignore');
+    const ignoreFiles = JSON.parse(core.getInput('ignore'));
 
     for (let file of files) {
       const filename = file.filename;
