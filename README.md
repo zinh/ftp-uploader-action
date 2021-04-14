@@ -1,3 +1,16 @@
+FTP server uploader action.
+
+Input:
+
+|Params name|Type|Required|Default|Example|
+|--|--|--|--|--|
+|files|[String]|Yes|
+|ftpUsername|String|No|anonymous|
+|ftpPassword|String|No|
+|src|String|No|/|/dist|
+|dest|String|No|/
+|ignore|String|No|'[]'|'["node_modules"]'
+
 Sample config
 
 
