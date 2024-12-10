@@ -2,12 +2,11 @@ const core = require('@actions/core');
 const exec = require('@actions/exec');
 const path = require('path');
 
-async function main(){
+async function main() {
   try {
-    const dryRun = core.getInput('dryRun');
+    const dryRun = core.getInput('dryRun', { required: false });
     if (dryRun === 'true')
       console.log('Running in dryRun mode');
-    const time = (new Date()).toTimeString();
     const files = JSON.parse(core.getInput('files'));
 
     const src = core.getInput('src');
@@ -29,7 +28,7 @@ async function main(){
       const serverPath = `${ftpHostname}/${dest}/${remoteDirPath}/`.replace(/\/{2,}/g, '/');
       const fullFtpPath = `ftp://${serverPath}`;
       let curlFlags;
-      switch(file.status) {
+      switch (file.status) {
         case 'removed':
           const fileToRemove = path.basename(filename);
           curlFlags = ['--silent', '--quote', `-DELE ${fileToRemove}`, '--user', `${ftpUsername}:${ftpPassword}`, fullFtpPath]
